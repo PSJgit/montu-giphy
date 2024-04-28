@@ -16,8 +16,10 @@ const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<Mode>("trending")
   const limit = 20
 
-  // trending and search functions have some similarity, potential to merge into one function
-  // lengthy/duplicative but readable currently
+  /* trending and search functions have some similarity, potential to merge into one function
+     lengthy/duplicative but readable currently 
+     needs additional error reporting to pass to the ui, out of time
+  */
   const fetchTrendingGifs = async () => {
     if (loading) return
     setLoading(true)
@@ -37,8 +39,8 @@ const App: React.FC = () => {
       } = response
 
       setTrendingGifs((prevGifs) => {
-        // prevent issues with react strict mode (double render)
-        // in dev (only an issue as we're infinite scrolling/fetching)
+        /* prevent issues with react strict mode (double render)
+           in dev (only an issue as we're infinite scrolling/fetching) */
         if (offset === 0) {
           return [...newGifs]
         }
@@ -89,6 +91,7 @@ const App: React.FC = () => {
   const handleViewChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     setViewMode(e.currentTarget.name as Mode)
   }
+
   return (
     <>
       <h1 className="main-heading">Montu Giphy Tech Test</h1>

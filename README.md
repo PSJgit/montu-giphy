@@ -1,3 +1,16 @@
+# Notes @Montu code reviewer
+
+To run this, please add the api key to the env, example is in the env.example file
+
+I've gone with vanilla css rather than a component lib as there's not much to style (I asked before starting if I could use Chakra ui)
+
+I've implemented the requirements plus
+
+- Infinite scroll (added this from the start as I didn't want to use time retrofitting)
+- Loading states
+
+I've run out of time prior to being able to introduce save functionality. This would of been implemented with local storage as a quick solution
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -17,9 +30,9 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
 }
