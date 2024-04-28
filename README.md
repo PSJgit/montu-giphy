@@ -1,4 +1,4 @@
-# Notes @Montu code reviewer
+# Notes @Montu code reviewer!
 
 To run this, please add the api key to the env, example is in the env.example file
 
@@ -9,7 +9,9 @@ I've implemented the requirements plus
 - Infinite scroll (added this from the start as I didn't want to use time retrofitting)
 - Loading states
 
-I've run out of time prior to being able to introduce save functionality. This would of been implemented with local storage as a quick solution
+I've run out of time before being able to introduce save functionality. This would have been implemented with local storage as a quick solution. I've left comments throughout on things I would like to upgrade/change, in addition to this I would have liked to have made a better layout/design, but chose to mimic [Giphy](https://giphy.com/) to fit within the time constraints
+
+Looking forward to hearing feedback
 
 # React + TypeScript + Vite
 
