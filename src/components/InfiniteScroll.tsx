@@ -3,28 +3,33 @@ import { GifData } from "../types/GiphyData"
 import { useInView } from "react-intersection-observer"
 
 type Props = {
-  gifs: GifData[]
+  trendingGifs: GifData[]
   loading: boolean
-  fetchGifs: any
+  fetchTrendingGifs: () => Promise<void>
 }
 
-const InfiniteScroll: React.FC<Props> = ({ gifs, loading, fetchGifs }) => {
+const InfiniteScroll: React.FC<Props> = ({
+  trendingGifs,
+  loading,
+  fetchTrendingGifs,
+}) => {
   // Intersection Observer ref
   const { ref, inView } = useInView()
-  console.log("loading", loading)
 
   useEffect(() => {
-    if (inView && !loading) {
-      fetchGifs()
+    if (inView && !loading && trendingGifs) {
+      fetchTrendingGifs()
     }
     // only fetch on view change
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
 
+  if (!trendingGifs) return
+
   return (
     <>
       <div className="gif-grid gif-trending">
-        {gifs.map((gif) => (
+        {trendingGifs.map((gif) => (
           <div className="gif-item" key={gif.id}>
             <img src={gif.images.fixed_height.url} alt={gif.id} />
           </div>

@@ -3,18 +3,22 @@ import axios from "axios"
 import config from "../config"
 import { GifData } from "./types/GiphyData"
 import InfiniteScroll from "./components/InfiniteScroll"
+import Search from "./components/Search"
 import "./App.css"
 
 type Mode = "trending" | "search"
 
 const App: React.FC = () => {
-  const [gifs, setGifs] = useState<GifData[]>([])
+  const [trendingGifs, setTrendingGifs] = useState<GifData[]>([])
+  const [searchGifs, setSearchGifs] = useState<GifData[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [offset, setOffset] = useState<number>(0)
   const [viewMode, setViewMode] = useState<Mode>("trending")
   const limit = 20
 
-  const fetchGifs = async () => {
+  // trending and search functions have some similarity, potential to merge into one function
+  // lengthy/duplicative but readable currently
+  const fetchTrendingGifs = async () => {
     if (loading) return
     setLoading(true)
 
@@ -32,7 +36,7 @@ const App: React.FC = () => {
         data: { data: newGifs },
       } = response
 
-      setGifs((prevGifs) => {
+      setTrendingGifs((prevGifs) => {
         // prevent issues with react strict mode (double render)
         // in dev (only an issue as we're infinite scrolling/fetching)
         if (offset === 0) {
@@ -56,14 +60,34 @@ const App: React.FC = () => {
     }
   }
 
+  const fetchSearchGifs = async (query: string) => {
+    if (loading || !query) return
+    setLoading(true)
+    try {
+      const response = await axios.get(config.giphy.searchEndpoint, {
+        params: {
+          api_key: import.meta.env.VITE_GIPHY_API,
+          limit: 50,
+          offset: 0,
+          q: query,
+        },
+      })
+
+      setSearchGifs(response.data.data)
+    } catch (error) {
+      console.error("Error fetching GIFs:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
-    fetchGifs()
+    fetchTrendingGifs()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log("gifs", gifs)
-  console.log("offset", offset)
-
+  console.log("trending gifs", trendingGifs)
+  console.log("search gifs", searchGifs)
   const handleViewChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     setViewMode(e.currentTarget.name as Mode)
   }
@@ -80,9 +104,13 @@ const App: React.FC = () => {
       </div>
 
       {viewMode === "trending" ? (
-        <InfiniteScroll gifs={gifs} loading={loading} fetchGifs={fetchGifs} />
+        <InfiniteScroll
+          trendingGifs={trendingGifs}
+          loading={loading}
+          fetchTrendingGifs={fetchTrendingGifs}
+        />
       ) : viewMode === "search" ? (
-        <>search</>
+        <Search fetchSearchGifs={fetchSearchGifs} searchGifs={searchGifs} />
       ) : null}
     </>
   )

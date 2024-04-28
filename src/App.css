@@ -5,7 +5,6 @@
 }
 
 /* Nav/button styles */
-
 .main-heading {
   text-align: center;
 }
@@ -19,16 +18,26 @@
 }
 
 .view-mode-container > button {
-  color: white;
   flex: 1;
 }
 
 /* Grid styles */
-
 .gif-grid {
   display: grid;
   grid-template-columns: 200px 200px 200px;
   grid-gap: 10px;
   background-color: #fff;
   color: #444;
+}
+
+/* Search styles */
+.search-container {
+  margin: 0 auto;
+}
+
+.search-container > form {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
