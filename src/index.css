@@ -1,3 +1,5 @@
+/* quick css reset */
+
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -20,6 +22,7 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background: #121212;
 }
 /*
   5. Improve media defaults
@@ -77,9 +80,17 @@ button {
 button:hover {
   background-color: #303030;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+/* Custom focus styles for inputs */
+input:focus {
+  outline: none;
+  border: 1px solid white;
+}
+
+/* Custom focus styles for buttons */
+button:focus {
+  outline: none;
+  border: 1px solid white;
 }
 
 h1,
@@ -90,4 +101,5 @@ h5,
 h6 {
   font-family: sans-serif;
   line-height: 2;
+  color: white;
 }

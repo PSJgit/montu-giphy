@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { GifData } from "../types/GiphyData"
-import { useInView } from "react-intersection-observer"
+import { useInView } from "react-intersection-observer" // used a lib for the intersection observer for speed of use
+import GifItem from "./GifItem"
 
 type Props = {
   trendingGifs: GifData[]
@@ -30,14 +31,12 @@ const InfiniteScroll: React.FC<Props> = ({
     <>
       <div className="gif-grid gif-trending">
         {trendingGifs.map((gif) => (
-          <div className="gif-item" key={gif.id}>
-            <img src={gif.images.fixed_height.url} alt={gif.id} />
-          </div>
+          <GifItem gif={gif} key={gif.id} />
         ))}
       </div>
 
       {/* intersection observer to load more gifs */}
-      <div ref={ref} style={{ height: "50px", backgroundColor: "lightgray" }}>
+      <div ref={ref} className="load-more-marker">
         {loading ? "Loading..." : "Scroll down to load more"}
       </div>
     </>

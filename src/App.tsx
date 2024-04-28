@@ -86,8 +86,6 @@ const App: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log("trending gifs", trendingGifs)
-  console.log("search gifs", searchGifs)
   const handleViewChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     setViewMode(e.currentTarget.name as Mode)
   }
@@ -95,10 +93,14 @@ const App: React.FC = () => {
     <>
       <h1 className="main-heading">Montu Giphy Tech Test</h1>
       <div className="view-mode-container">
-        <button name="trending" onClick={handleViewChange}>
+        <button
+          name="trending"
+          className="trending-btn"
+          onClick={handleViewChange}
+        >
           Trending
         </button>
-        <button name="search" onClick={handleViewChange}>
+        <button name="search" className="search-btn" onClick={handleViewChange}>
           Search
         </button>
       </div>

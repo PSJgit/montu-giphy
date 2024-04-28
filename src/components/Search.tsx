@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { GifData } from "../types/GiphyData"
+import GifItem from "../components/GifItem"
 
 type Props = {
   fetchSearchGifs: (query: string) => Promise<void>
@@ -8,7 +9,6 @@ type Props = {
 
 const Search: React.FC<Props> = ({ fetchSearchGifs, searchGifs }) => {
   const [searchValue, setSearchValue] = useState<string>("")
-  console.log("searchValue", searchValue)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
@@ -36,13 +36,15 @@ const Search: React.FC<Props> = ({ fetchSearchGifs, searchGifs }) => {
         </button>
       </form>
 
-      <div className="gif-grid">
-        {searchGifs.map((gif) => (
-          <div className="gif-item" key={gif.id}>
-            <img src={gif.images.fixed_height.url} alt={gif.id} />
-          </div>
-        ))}
-      </div>
+      {searchGifs.length > 0 ? (
+        <div className="gif-grid">
+          {searchGifs.map((gif) => (
+            <GifItem gif={gif} key={gif.id} />
+          ))}
+        </div>
+      ) : (
+        <p className="no-results-search">No gifs, search for some above!</p>
+      )}
     </div>
   )
 }
