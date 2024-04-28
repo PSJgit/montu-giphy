@@ -16,9 +16,10 @@ const colorPalette = [
 const chooseRandomColor = () => {
   return colorPalette[Math.floor(Math.random() * colorPalette.length)]
 }
+
 const GifItem: React.FC<Props> = ({ gif }) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [backgroundColor, setBackgroundColor] = useState(chooseRandomColor()) // Random predefined color
+  const [backgroundColor, setBackgroundColor] = useState(chooseRandomColor())
 
   const handleImageLoad = () => {
     setIsLoading(false)

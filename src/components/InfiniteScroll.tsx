@@ -29,6 +29,7 @@ const InfiniteScroll: React.FC<Props> = ({
 
   return (
     <>
+      {/* Grid is pretty basic, would like to have made a masonry grid like giphy itself but not enough time */}
       <div className="gif-grid gif-trending">
         {trendingGifs.map((gif) => (
           <GifItem gif={gif} key={gif.id} />
