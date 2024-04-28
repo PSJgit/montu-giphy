@@ -3,3 +3,13 @@
   width: 100%;
   padding: 4rem;
 }
+
+/* Grid styles */
+
+.gif-grid {
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
