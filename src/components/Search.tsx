@@ -26,7 +26,6 @@ const Search: React.FC<Props> = ({ fetchSearchGifs, searchGifs }) => {
         <input
           id="search-input"
           type="search"
-          className="search-input"
           value={searchValue}
           onChange={handleChange}
           placeholder="Search"
