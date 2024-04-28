@@ -5,10 +5,13 @@ import { GifData } from "./types/GiphyData"
 import InfiniteScroll from "./components/InfiniteScroll"
 import "./App.css"
 
+type Mode = "trending" | "search"
+
 const App: React.FC = () => {
   const [gifs, setGifs] = useState<GifData[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [offset, setOffset] = useState<number>(0)
+  const [viewMode, setViewMode] = useState<Mode>("trending")
   const limit = 20
 
   const fetchGifs = async () => {
@@ -30,7 +33,8 @@ const App: React.FC = () => {
       } = response
 
       setGifs((prevGifs) => {
-        // prevent issues with react strict mode (double render) in dev (only an issue as we're infinite scrolling/fetching)
+        // prevent issues with react strict mode (double render)
+        // in dev (only an issue as we're infinite scrolling/fetching)
         if (offset === 0) {
           return [...newGifs]
         }
@@ -59,9 +63,27 @@ const App: React.FC = () => {
 
   console.log("gifs", gifs)
   console.log("offset", offset)
+
+  const handleViewChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setViewMode(e.currentTarget.name as Mode)
+  }
   return (
     <>
-      <InfiniteScroll gifs={gifs} loading={loading} fetchGifs={fetchGifs} />
+      <h1 className="main-heading">Montu Giphy Tech Test</h1>
+      <div className="view-mode-container">
+        <button name="trending" onClick={handleViewChange}>
+          Trending
+        </button>
+        <button name="search" onClick={handleViewChange}>
+          Search
+        </button>
+      </div>
+
+      {viewMode === "trending" ? (
+        <InfiniteScroll gifs={gifs} loading={loading} fetchGifs={fetchGifs} />
+      ) : viewMode === "search" ? (
+        <>search</>
+      ) : null}
     </>
   )
 }

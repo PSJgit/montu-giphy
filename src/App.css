@@ -4,6 +4,25 @@
   padding: 4rem;
 }
 
+/* Nav/button styles */
+
+.main-heading {
+  text-align: center;
+}
+
+.view-mode-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.view-mode-container > button {
+  color: white;
+  flex: 1;
+}
+
 /* Grid styles */
 
 .gif-grid {
