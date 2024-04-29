@@ -20,7 +20,7 @@ const chooseRandomColor = () => {
 const GifItem: React.FC<Props> = ({ gif }) => {
   const [isLoading, setIsLoading] = useState(true)
   const backgroundColor = chooseRandomColor()
-  console.log("backgroundColor", backgroundColor)
+
   const handleImageLoad = () => {
     setIsLoading(false)
   }
