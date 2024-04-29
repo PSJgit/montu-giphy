@@ -38,7 +38,7 @@ const InfiniteScroll: React.FC<Props> = ({
 
       {/* intersection observer to load more gifs */}
       <div ref={ref} className="load-more-marker">
-        {loading ? "Loading..." : "Scroll down to load more"}
+        <p> {loading ? "Loading..." : "Scroll down to load more"}</p>
       </div>
     </>
   )
