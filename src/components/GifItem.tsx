@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { GifData } from "../types/GiphyData"
 
 type Props = {
@@ -19,16 +19,11 @@ const chooseRandomColor = () => {
 
 const GifItem: React.FC<Props> = ({ gif }) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [backgroundColor, setBackgroundColor] = useState(chooseRandomColor())
-
+  const backgroundColor = chooseRandomColor()
+  console.log("backgroundColor", backgroundColor)
   const handleImageLoad = () => {
     setIsLoading(false)
   }
-
-  useEffect(() => {
-    setBackgroundColor(chooseRandomColor())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <div
